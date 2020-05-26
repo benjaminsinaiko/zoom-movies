@@ -1,16 +1,33 @@
 import React from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { MoviesProvider } from '../src/contexts/moviesContext';
 import MovieSearch from '../src/pages/MovieSearch';
 
-function App() {
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
+function AppRouter() {
   return (
-    <MoviesProvider>
-      <div className='App'>
-        <MovieSearch />
-      </div>
-    </MoviesProvider>
+    <Routes>
+      <Route path='/' element={<MovieSearch />} />
+    </Routes>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <MoviesProvider>
+        <Router>
+          <AppRouter />
+        </Router>
+      </MoviesProvider>
+    </ThemeProvider>
+  );
+}

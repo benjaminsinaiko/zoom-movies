@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext } from 'react';
+import React, { useReducer, createContext, useContext, useCallback } from 'react';
 
 import fetchMovieData from '../utils/fetchMovieData';
 
@@ -39,12 +39,12 @@ const initialState = {
 function MoviesProvider(props) {
   const [state, dispatch] = useReducer(moviesReducer, initialState);
 
-  async function getMovie() {
+  const getMovie = useCallback(async () => {
     dispatch({ type: 'request_movie' });
 
     const { movieTitle, imagePath } = await fetchMovieData();
     dispatch({ type: 'movie_success', payload: { movieTitle, imagePath } });
-  }
+  }, []);
 
   return <MoviesContext.Provider value={{ state, getMovie }} {...props} />;
 }
