@@ -1,12 +1,15 @@
 import React from 'react';
 
+import { MoviesProvider } from '../src/contexts/moviesContext';
 import MovieSearch from '../src/pages/MovieSearch';
 
 function App() {
   return (
-    <div className='App'>
-      <MovieSearch />
-    </div>
+    <MoviesProvider>
+      <div className='App'>
+        <MovieSearch />
+      </div>
+    </MoviesProvider>
   );
 }
 

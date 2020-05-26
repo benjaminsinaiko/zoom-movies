@@ -5,6 +5,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { useMovies } from '../../contexts/moviesContext';
 import BottomActions from './BottomActions';
 
 const useStyles = makeStyles({
@@ -46,8 +47,8 @@ const useStyles = makeStyles({
 
 export default function MediaCard({ movie, image, handleGetMovie }) {
   const classes = useStyles();
+  const { state } = useMovies();
   const [showMovieDetails, setShowMovieDetails] = useState(false);
-  const releaseYear = new Date(movie?.release_date).getFullYear() || '';
 
   function toggleMovieDetails() {
     setShowMovieDetails(!showMovieDetails);
@@ -61,18 +62,16 @@ export default function MediaCard({ movie, image, handleGetMovie }) {
   return (
     <div>
       <Card className={classes.root}>
-        {image ? (
+        {state.isLoading ? (
+          <div className={classes.spinner}>
+            <CircularProgress />
+          </div>
+        ) : (
           <>
-            <CardMedia
-              className={classes.media}
-              image={`https://image.tmdb.org/t/p/original${image?.file_path}`}
-              title='Movie Image'
-            />
+            <CardMedia className={classes.media} image={state.image} title='Movie Image' />
             <div className={classes.movieInfo}>
               {showMovieDetails ? (
-                <Typography variant='h5'>
-                  {movie.title} ({releaseYear})
-                </Typography>
+                <Typography variant='h5'>{state.movie}</Typography>
               ) : (
                 <Typography variant='h3' className={classes.blurryText}>
                   ? ? ? ? ? ? ? ? ? ?
@@ -80,10 +79,6 @@ export default function MediaCard({ movie, image, handleGetMovie }) {
               )}
             </div>
           </>
-        ) : (
-          <div className={classes.spinner}>
-            <CircularProgress />
-          </div>
         )}
       </Card>
       <BottomActions

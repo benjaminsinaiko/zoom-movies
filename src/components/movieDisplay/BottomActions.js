@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+import { useMovies } from '../../contexts/moviesContext';
+
 const useStyles = makeStyles({
   buttonContainer: {
     marginTop: 20,
@@ -27,6 +29,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard({ detailsShown, showMovieDetails, nextMovie }) {
   const classes = useStyles();
+  const { getMovie } = useMovies();
 
   return (
     <div className={classes.buttonContainer}>
@@ -51,7 +54,7 @@ export default function MediaCard({ detailsShown, showMovieDetails, nextMovie })
           size='small'
           color='primary'
           className={classes.changeMovieButton}
-          onClick={nextMovie}
+          onClick={getMovie}
         >
           Next
         </Button>

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
-import useGetMovie from '../hooks/useGetMovie';
+import { useMovies } from '../contexts/moviesContext';
 import MovieCard from '../components/movieDisplay/MovieCard';
 
 const useStyles = makeStyles({
@@ -21,18 +21,15 @@ const useStyles = makeStyles({
 
 export default function MovieSearch() {
   const classes = useStyles();
-  const { movie, image, searchMovies } = useGetMovie();
-
-  async function handleGetMovie() {
-    return await searchMovies();
-  }
+  const { state, getMovie } = useMovies();
+  console.log('history', state.history);
 
   return (
     <div className={classes.root}>
-      {movie ? (
-        <MovieCard movie={movie} image={image} handleGetMovie={handleGetMovie} />
+      {state.movie ? (
+        <MovieCard />
       ) : (
-        <Button variant='contained' color='primary' size='large' onClick={handleGetMovie}>
+        <Button variant='contained' color='primary' size='large' onClick={getMovie}>
           Let's Go!
         </Button>
       )}
