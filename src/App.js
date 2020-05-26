@@ -12,7 +12,7 @@ function AppRouter() {
   return (
     <Routes>
       <Route path='/' element={<HomeSearch />} />
-      <Route path='/movies' element={<MovieSearch />} />
+      <Route path='movies' element={<MovieSearch />} />
     </Routes>
   );
 }

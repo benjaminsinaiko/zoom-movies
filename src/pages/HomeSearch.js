@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FastForwardIcon from '@material-ui/icons/FastForward';
+
+import { useMovies } from '../contexts/moviesContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,8 +73,10 @@ const initialState = ['release80s', 'release90s', 'release00s'];
 
 export default function HomeSearch() {
   const classes = useStyles();
-  const [decades, setDecades] = useState(initialState);
-  const isAllSelected = decades === initialState;
+  const navigate = useNavigate();
+  const { state, updateDecades, getMovie } = useMovies();
+  const { decades } = state;
+  const isAllSelected = decades.length === initialState.length;
   const noneSelected = decades.length === 0;
 
   function isSelected(id) {
@@ -80,14 +85,19 @@ export default function HomeSearch() {
 
   function toggleDecade(id) {
     if (isSelected(id)) {
-      setDecades(decades.filter((d) => d !== id));
+      updateDecades(decades.filter((d) => d !== id));
     } else {
-      setDecades([...decades, id]);
+      updateDecades([...decades, id]);
     }
   }
 
   function selectAll() {
-    setDecades(initialState);
+    updateDecades(initialState);
+  }
+
+  async function searchMovies() {
+    getMovie();
+    navigate('/movies');
   }
 
   return (
@@ -99,13 +109,13 @@ export default function HomeSearch() {
         <div className={classes.decadeContainer}>
           <DecadeButton
             id='release80s'
-            label='90'
+            label='80'
             isSelected={isSelected('release80s')}
             toggle={toggleDecade}
           />
           <DecadeButton
             id='release90s'
-            label='80'
+            label='90'
             isSelected={isSelected('release90s')}
             toggle={toggleDecade}
           />
@@ -132,6 +142,7 @@ export default function HomeSearch() {
           endIcon={<FastForwardIcon style={{ fontSize: 46 }} />}
           className={classes.searchButton}
           disabled={noneSelected}
+          onClick={searchMovies}
         >
           Let's Go!
         </Button>

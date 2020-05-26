@@ -2,16 +2,10 @@ import movieDB from '../api/tmdb';
 import getRandomItem from '../utils/getRandomItem';
 import { releaseYears, pages } from '../api/queryConstants';
 
-const releaseAllYears = [
-  ...releaseYears.release80s,
-  ...releaseYears.release90s,
-  ...releaseYears.release00s,
-];
-
-async function getRandomMovie(releaseYears) {
+async function getRandomMovie(selectedDecades) {
   const baseURL = `https://api.themoviedb.org/3/discover/movie?`;
 
-  const randomYear = getRandomItem(releaseYears);
+  const randomYear = getRandomItem(selectedDecades);
   const randomPage = getRandomItem(pages);
 
   const { data } = await movieDB.get(
@@ -33,19 +27,24 @@ async function getImage(movieId) {
   }
 }
 
-export default async function fetchMovieData(releaseYears = releaseAllYears) {
-  const movieResult = await getRandomMovie(releaseYears);
+export default async function fetchMovieData(decadesArray) {
+  const selectedDecades = decadesArray.reduce((array, decade) => {
+    return [...array, ...releaseYears[decade]];
+  }, []);
+
+  const movieResult = await getRandomMovie(selectedDecades);
   const imageResult = await getImage(movieResult.id);
 
   // Recursively find a film with a backdrop image
   if (!imageResult) {
-    return await fetchMovieData(releaseYears);
+    return await fetchMovieData(decadesArray);
   } else {
     // Format movieTitle
     const releaseYear = new Date(movieResult.release_date).getFullYear();
     const movieTitle = `${movieResult.title} (${releaseYear})`;
 
     return {
+      id: movieResult.id,
       movieTitle,
       imagePath: imageResult.file_path,
     };
