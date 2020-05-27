@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard() {
+export default function MediaCard({ openDrawer }) {
   const classes = useStyles();
   const { state, getMovie } = useMovies();
   const [isDisplayMovie, setIsDisplayMovie] = useState(false);
@@ -91,6 +91,7 @@ export default function MediaCard() {
         detailsShown={isDisplayMovie}
         showMovieDetails={handleShowDetails}
         fetchNextMovie={fetchNextMovie}
+        openDrawer={openDrawer}
       />
     </div>
   );

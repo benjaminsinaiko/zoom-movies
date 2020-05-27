@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ detailsShown, showMovieDetails, fetchNextMovie }) {
+export default function MediaCard({ detailsShown, showMovieDetails, fetchNextMovie, openDrawer }) {
   const classes = useStyles();
 
   return (
@@ -42,7 +42,12 @@ export default function MediaCard({ detailsShown, showMovieDetails, fetchNextMov
         </Button>
       </div>
       <div className={classes.changeMovieContainer}>
-        <Button variant='contained' size='small' className={classes.changeMovieButton}>
+        <Button
+          variant='contained'
+          size='small'
+          className={classes.changeMovieButton}
+          onClick={openDrawer}
+        >
           Previous
         </Button>
 

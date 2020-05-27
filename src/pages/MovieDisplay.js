@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MovieDisplay() {
+export default function MovieDisplay({ openDrawer }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ export default function MovieDisplay() {
         >
           Back
         </Button>
-        <MovieCard />
+        <MovieCard openDrawer={openDrawer} />
       </div>
     </Slide>
   );

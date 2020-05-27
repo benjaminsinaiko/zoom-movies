@@ -22,8 +22,8 @@ function moviesReducer(state, action) {
         movie: movieTitle,
         image: `https://image.tmdb.org/t/p/original${imagePath}`,
         history: [
+          { id: id, title: movieTitle, image: `https://image.tmdb.org/t/p/w500${imagePath}` },
           ...state.history,
-          { id: id, movie: movieTitle, image: `https://image.tmdb.org/t/p/w500${imagePath}` },
         ],
       };
     case 'update_decades':

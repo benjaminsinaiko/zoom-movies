@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     height: '100vh',
   },
+  historyButton: {
+    position: 'absolute',
+    top: 5,
+    left: 20,
+    color: theme.palette.error.main,
+  },
   decadeContainer: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -71,13 +77,14 @@ function DecadeButton({ id, label, isSelected, toggle }) {
 
 const initialState = ['release80s', 'release90s', 'release00s'];
 
-export default function HomeSearch() {
+export default function HomeSearch({ openDrawer }) {
   const classes = useStyles();
   const navigate = useNavigate();
   const { state, updateDecades, getMovie } = useMovies();
   const { decades } = state;
   const isAllSelected = decades.length === initialState.length;
   const noneSelected = decades.length === 0;
+  const hasHistory = state.history.length > 0;
 
   function isSelected(id) {
     return decades.includes(id);
@@ -102,9 +109,15 @@ export default function HomeSearch() {
 
   return (
     <Container className={classes.root}>
+      {hasHistory && (
+        <Button className={classes.historyButton} onClick={openDrawer}>
+          Movie History
+        </Button>
+      )}
+
       <div className={classes.mainContainer}>
         <Typography align='center' variant='h3' gutterBottom>
-          Pick Movie Decades
+          Pick Release Dates
         </Typography>
         <div className={classes.decadeContainer}>
           <DecadeButton
