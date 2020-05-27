@@ -11,6 +11,7 @@ import BottomActions from './BottomActions';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '90vw',
+    maxWidth: 1000,
     height: '70vh',
     background: theme.palette.warning.light,
   },
