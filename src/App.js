@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import darkTheme from '../src/utils/theme';
 import { MoviesProvider } from '../src/contexts/moviesContext';
 import HomeSearch from '../src/pages/HomeSearch';
-import MovieSearch from '../src/pages/MovieSearch';
+import MovieDisplay from './pages/MovieDisplay';
 
 function AppRouter() {
   return (
     <Routes>
       <Route path='/' element={<HomeSearch />} />
-      <Route path='movies' element={<MovieSearch />} />
+      <Route path='movies' element={<MovieDisplay />} />
     </Routes>
   );
 }

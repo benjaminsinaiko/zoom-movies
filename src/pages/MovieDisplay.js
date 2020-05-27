@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
+import Slide from '@material-ui/core/Slide';
 
 import MovieCard from '../components/movieDisplay/MovieCard';
 
@@ -22,20 +23,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MovieSearch() {
+export default function MovieDisplay() {
   const classes = useStyles();
   const navigate = useNavigate();
 
   return (
-    <div className={classes.root}>
-      <Button
-        className={classes.homeButton}
-        startIcon={<FastRewindIcon />}
-        onClick={() => navigate('/')}
-      >
-        Back
-      </Button>
-      <MovieCard />
-    </div>
+    <Slide direction='left' in mountOnEnter unmountOnExit>
+      <div className={classes.root}>
+        <Button
+          className={classes.homeButton}
+          startIcon={<FastRewindIcon />}
+          onClick={() => navigate('/')}
+        >
+          Back
+        </Button>
+        <MovieCard />
+      </div>
+    </Slide>
   );
 }

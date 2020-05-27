@@ -9,7 +9,7 @@ async function getRandomMovie(selectedDecades) {
   const randomPage = getRandomItem(pages);
 
   const { data } = await movieDB.get(
-    `${baseURL}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${randomPage}&primary_release_year=${randomYear}&vote_count.gte=0.0&with_original_language=en`
+    `${baseURL}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${randomPage}&primary_release_year=${randomYear}&vote_count.gte=0.0&with_original_language=en&without_genres=16%2C10770`
   );
 
   const randomMovie = getRandomItem(data.results);
