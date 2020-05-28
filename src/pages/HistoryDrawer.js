@@ -26,11 +26,12 @@ export default function HistoryDrawer() {
   const classes = useStyles();
   const { state } = useMovies();
   const { history } = state;
+  const hasHistory = state.history.length > 0;
 
   return (
     <div className={classes.root}>
       <Typography color='secondary' variant='h5'>
-        {!history ? 'Movie History' : 'No Movies Yet'}
+        {hasHistory ? 'Movie History' : 'No Movies Yet'}
       </Typography>
       {history &&
         history.map((movie) => (

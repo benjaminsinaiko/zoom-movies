@@ -1,3 +1,83 @@
+<img src="./src/screenshots/movies-logo.png" width="50%" height="auto">
+
+# Zoom Movies
+
+A movie image guessing game for fun on Zoom calls.
+
+## Table of contents
+
+- [About](#about)
+- [Installation](#installation)
+- [How to use](#how-to-use)
+- [Credits](#credits)
+- [License](#license)
+
+## About
+
+Thinking of things to do during friendly zoom calls, we started adding movie images to our backgrounds and having others guess. This app is an alternative to finding a movie image, saving it to Desktop, then adding it to virtual background on zoom calls - then doing it all over again for the next movie.
+
+Zoom Movies uses The Movie Database's Discover API to randomly pick movies and display them onscreen. Users can than guess the movie title before revealing.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+**Zoom Movies** is live on [Netlify](https://netlify.com/):
+
+[https://zoom-movies.netlify.app](https://zoom-movies.netlify.app)
+
+## Installation
+
+You’ll need to have Node >= 8.10 and npm >= 5.6 on your machine.
+
+```bash
+# Clone this repository
+$ git clone https://github.com/benjaminsinaiko/zoom-movies.git
+
+# Go into the repository
+$ cd zoom-movies
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+
+# If a new page doesn't open go to http://localhost:3000/ to see your app.
+
+** You will also need a TMDb API key (added to an .env file)
+
+```
+
+## How To Use
+
+Your choice of 80's, 90's, or 00's for movie release dates. Or pick all three.
+
+<img src="./src/screenshots/movies-search.png" width="75%" height="auto">
+
+Hit "Let's Go!" and see a random movie image. Take a guess. Click on the "????" to display the movie title.
+
+<img src="./src/screenshots/movies-image.png" width="75%" height="auto">
+
+Click on the History Icon to see a list of all prior movies displayed.
+
+<img src="./src/screenshots/movies-history.png" width="75%" height="auto">
+
+## Credits
+
+Zoom Movies uses the following open source packages:
+
+- [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api)
+- [React](https://reactjs.org/)
+- [React Router v6](https://github.com/ReactTraining/react-router/tree/f59ee5488bc343cf3c957b7e0cc395ef5eb572d2)
+- [Axios](https://github.com/axios/axios)
+- [Material UI](https://material-ui.com/)
+
+## License
+
+This project is licensed under the terms of the
+[MIT license](/LICENSE).
+
+# From Create React App
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
