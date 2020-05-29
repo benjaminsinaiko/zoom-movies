@@ -12,17 +12,26 @@ function moviesReducer(state, action) {
         isLoading: true,
         movie: null,
         image: null,
+        imdbURL: null,
       };
     case 'movie_success':
-      const { id, movieTitle, imagePath } = action.payload;
+      const { id, movieTitle, imagePath, imdbID } = action.payload;
+      const imdb = `https://www.imdb.com/title/${imdbID}`;
+
       return {
         ...state,
         isLoading: false,
         id: id,
         movie: movieTitle,
         image: `https://image.tmdb.org/t/p/original${imagePath}`,
+        imdbURL: imdb,
         history: [
-          { id: id, title: movieTitle, image: `https://image.tmdb.org/t/p/w500${imagePath}` },
+          {
+            id: id,
+            title: movieTitle,
+            image: `https://image.tmdb.org/t/p/w500${imagePath}`,
+            imdbURL: imdb,
+          },
           ...state.history,
         ],
       };
@@ -42,6 +51,7 @@ const initialState = {
   id: null,
   movie: null,
   image: null,
+  imdbURL: null,
   history: [],
   decades: ['release80s', 'release90s', 'release00s'],
 };
@@ -52,8 +62,8 @@ function MoviesProvider(props) {
   // Movie Search
   async function getMovie() {
     dispatch({ type: 'request_movie' });
-    const { id, movieTitle, imagePath } = await fetchMovieData(state.decades);
-    dispatch({ type: 'movie_success', payload: { id, movieTitle, imagePath } });
+    const { id, movieTitle, imagePath, imdbID } = await fetchMovieData(state.decades);
+    dispatch({ type: 'movie_success', payload: { id, movieTitle, imagePath, imdbID } });
   }
 
   // Decades updater

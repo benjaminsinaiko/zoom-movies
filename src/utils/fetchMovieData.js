@@ -16,14 +16,16 @@ async function getRandomMovie(selectedDecades) {
   return randomMovie;
 }
 
-async function getImage(movieId) {
-  const { data } = await movieDB.get(`https://api.themoviedb.org/3/movie/${movieId}/images`);
+async function getData(movieId) {
+  const { data } = await movieDB.get(`https://api.themoviedb.org/3/movie/${movieId}`);
 
-  if (data.backdrops.length <= 0) {
+  if (!data.backdrop_path) {
     return null;
   } else {
-    const aspectFiltered = data.backdrops.filter((image) => image.aspect_ratio > 1.25);
-    return getRandomItem(aspectFiltered);
+    return {
+      imagePath: data.backdrop_path,
+      imdbID: data.imdb_id || '',
+    };
   }
 }
 
@@ -33,10 +35,10 @@ export default async function fetchMovieData(decadesArray) {
   }, []);
 
   const movieResult = await getRandomMovie(selectedDecades);
-  const imageResult = await getImage(movieResult.id);
+  const movieData = await getData(movieResult.id);
 
   // Recursively find a film with a backdrop image
-  if (!imageResult) {
+  if (!movieData) {
     return await fetchMovieData(decadesArray);
   } else {
     // Format movieTitle
@@ -46,7 +48,8 @@ export default async function fetchMovieData(decadesArray) {
     return {
       id: movieResult.id,
       movieTitle,
-      imagePath: imageResult.file_path,
+      imagePath: movieData.imagePath,
+      imdbID: movieData.imdbID,
     };
   }
 }

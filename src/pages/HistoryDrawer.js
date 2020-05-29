@@ -1,8 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
 import { useMovies } from '../contexts/moviesContext';
+import goToIMDb from '../utils/goToIMDb';
 import HistoryCard from '../components/history/HistoryCard';
 import HistoryNoImageCard from '../components/history/HistoryNoImageCard';
 
@@ -37,9 +39,13 @@ export default function HistoryDrawer() {
       {history &&
         history.map((movie, i) => {
           return i < 10 ? (
-            <HistoryCard key={movie.id} title={movie.title} image={movie.image} />
+            <ButtonBase key={movie.id} onClick={() => goToIMDb(movie.imdbURL)}>
+              <HistoryCard title={movie.title} image={movie.image} />
+            </ButtonBase>
           ) : (
-            <HistoryNoImageCard key={movie.id} title={movie.title} />
+            <ButtonBase key={movie.id} onClick={() => goToIMDb(movie.imdbURL)}>
+              <HistoryNoImageCard title={movie.title} />
+            </ButtonBase>
           );
         })}
     </div>
