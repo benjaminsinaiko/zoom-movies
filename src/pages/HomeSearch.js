@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     left: 20,
     color: theme.palette.error.main,
   },
+  mainContainer: {
+    maxWidth: 1200,
+  },
   decadeContainer: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -40,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   decadeButton: {
     width: '20vw',
+    maxWidth: '30%',
     height: '15vh',
     '& span': {
       fontSize: '.7em',
