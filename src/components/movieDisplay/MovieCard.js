@@ -11,14 +11,6 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useMovies } from '../../contexts/moviesContext';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   movieContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -30,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContainer: {
     width: '90vw',
-    maxWidth: 1000,
+    maxWidth: 1900,
     height: '95vh',
     background: theme.palette.warning.light,
   },
@@ -92,54 +84,48 @@ export default function MediaCard({ openDrawer }) {
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.movieContainer}>
-        <Button
-          variant='contained'
-          color='secondary'
-          className={classes.sideButtons}
-          onClick={openDrawer}
-        >
-          <HistoryIcon style={{ fontSize: 40 }} />
-        </Button>
+    <div className={classes.movieContainer}>
+      <Button
+        variant='contained'
+        color='secondary'
+        className={classes.sideButtons}
+        onClick={openDrawer}
+      >
+        <HistoryIcon style={{ fontSize: 40 }} />
+      </Button>
 
-        <Card className={classes.cardContainer}>
-          {!state.movie ? (
-            <div className={classes.loadingSkeleton}>
-              <Skeleton variant='rect' width='90%' height='80%' className={classes.skeleton} />
-              <Skeleton variant='text' width='90%' height='20%' className={classes.skeleton} />
+      <Card className={classes.cardContainer}>
+        {!state.movie ? (
+          <div className={classes.loadingSkeleton}>
+            <Skeleton variant='rect' width='90%' height='80%' className={classes.skeleton} />
+            <Skeleton variant='text' width='90%' height='20%' className={classes.skeleton} />
+          </div>
+        ) : (
+          <>
+            <CardMedia className={classes.media} image={state.image} title='Movie Image' />
+            <div className={classes.movieInfo}>
+              {isDisplayMovie ? (
+                <Typography variant='h4' align='center' className={classes.movieTitle}>
+                  {state.movie}
+                </Typography>
+              ) : (
+                <Typography variant='h3' className={classes.blurryText} onClick={handleShowDetails}>
+                  ? ? ? ? ? ? ? ? ? ?
+                </Typography>
+              )}
             </div>
-          ) : (
-            <>
-              <CardMedia className={classes.media} image={state.image} title='Movie Image' />
-              <div className={classes.movieInfo}>
-                {isDisplayMovie ? (
-                  <Typography variant='h4' align='center' className={classes.movieTitle}>
-                    {state.movie}
-                  </Typography>
-                ) : (
-                  <Typography
-                    variant='h3'
-                    className={classes.blurryText}
-                    onClick={handleShowDetails}
-                  >
-                    ? ? ? ? ? ? ? ? ? ?
-                  </Typography>
-                )}
-              </div>
-            </>
-          )}
-        </Card>
+          </>
+        )}
+      </Card>
 
-        <Button
-          variant='contained'
-          color='primary'
-          className={classes.sideButtons}
-          onClick={fetchNextMovie}
-        >
-          <SkipNextIcon style={{ fontSize: 40 }} />
-        </Button>
-      </div>
+      <Button
+        variant='contained'
+        color='primary'
+        className={classes.sideButtons}
+        onClick={fetchNextMovie}
+      >
+        <SkipNextIcon style={{ fontSize: 40 }} />
+      </Button>
     </div>
   );
 }

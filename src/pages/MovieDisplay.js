@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   homeButton: {
