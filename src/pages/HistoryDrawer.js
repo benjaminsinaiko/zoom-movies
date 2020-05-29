@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { useMovies } from '../contexts/moviesContext';
 import HistoryCard from '../components/history/HistoryCard';
+import HistoryNoImageCard from '../components/history/HistoryNoImageCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,9 +35,13 @@ export default function HistoryDrawer() {
         {hasHistory ? 'Movie History' : 'No Movies Yet'}
       </Typography>
       {history &&
-        history.map((movie) => (
-          <HistoryCard key={movie.id} title={movie.title} image={movie.image} />
-        ))}
+        history.map((movie, i) => {
+          return i < 10 ? (
+            <HistoryCard key={movie.id} title={movie.title} image={movie.image} />
+          ) : (
+            <HistoryNoImageCard key={movie.id} title={movie.title} />
+          );
+        })}
     </div>
   );
 }
