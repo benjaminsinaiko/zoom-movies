@@ -47,7 +47,7 @@ export default function MovieDisplay({ openDrawer }) {
           startIcon={<FastRewindIcon />}
           onClick={() => navigate('/')}
         >
-          Back
+          Home
         </Button>
 
         {imdbURL && (

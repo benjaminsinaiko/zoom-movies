@@ -7,9 +7,9 @@ import Drawer from '@material-ui/core/Drawer';
 import darkTheme from '../src/utils/theme';
 import { MoviesProvider } from '../src/contexts/moviesContext';
 import HistoryDrawer from '../src/pages/HistoryDrawer';
-import HomeSearch from '../src/pages/HomeSearch';
+import SearchParams from './pages/SearchParams';
 import MovieDisplay from './pages/MovieDisplay';
-import Title from './pages/Title';
+import Home from './pages/Home';
 
 function AppRouter() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -25,9 +25,9 @@ function AppRouter() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<HomeSearch openDrawer={openDrawer} />} />
+        <Route path='/' element={<Home openDrawer={openDrawer} />} />
         <Route path='movies' element={<MovieDisplay openDrawer={openDrawer} />} />
-        <Route path='title' element={<Title />} />
+        <Route path='/settings' element={<SearchParams openDrawer={openDrawer} />} />
       </Routes>
       <Drawer anchor='left' open={drawerOpen} onClose={closeDrawer}>
         <HistoryDrawer />
