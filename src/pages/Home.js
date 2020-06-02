@@ -33,14 +33,6 @@ const useStyles = makeStyles((theme) => ({
     right: 20,
     color: theme.palette.error.main,
   },
-  goContainer: {
-    height: 125,
-  },
-  searchButton: {
-    color: theme.palette.warning.main,
-    fontSize: 40,
-    alignSelf: 'flex-end',
-  },
   one: {
     color: theme.palette.primary.main,
   },
@@ -52,6 +44,20 @@ const useStyles = makeStyles((theme) => ({
   },
   four: {
     color: theme.palette.warning.main,
+  },
+  goContainer: {
+    height: 125,
+  },
+  goButton: {
+    alignSelf: 'flex-end',
+    fontSize: '4.5em',
+    color: '#fff',
+    textShadow: `0 0 5px ${theme.palette.warning.main}, 0 0 10px ${theme.palette.warning.main}, 0 0 15px ${theme.palette.warning.light}, 0 0 20px ${theme.palette.warning.light}`,
+    '&  svg': {
+      marginLeft: theme.spacing(4),
+      transform: 'scale(1.8)',
+      color: theme.palette.warning.light,
+    },
   },
 }));
 
@@ -97,7 +103,7 @@ export default function Home({ openDrawer }) {
       <div className={classes.goContainer}>
         <Button
           endIcon={<FastForwardIcon style={{ fontSize: 46 }} />}
-          className={classes.searchButton}
+          className={classes.goButton}
           onClick={searchMovies}
         >
           Let's Go!
