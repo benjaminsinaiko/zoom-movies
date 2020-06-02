@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -9,6 +9,8 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { useMovies } from '../../contexts/moviesContext';
+import useCountdown from '../../hooks/useCountdown';
+import Countdown from './Countdown';
 
 const useStyles = makeStyles((theme) => ({
   movieContainer: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   cardContainer: {
+    position: 'relative',
     width: '90vw',
     maxWidth: 1900,
     height: '95vh',
@@ -73,15 +76,22 @@ export default function MediaCard({ openDrawer }) {
   const classes = useStyles();
   const { state, getMovie } = useMovies();
   const [isDisplayMovie, setIsDisplayMovie] = useState(false);
+  const [count, isRunning, startCoundown] = useCountdown();
 
   function handleShowDetails() {
     setIsDisplayMovie(true);
   }
 
-  function fetchNextMovie() {
-    if (isDisplayMovie) setIsDisplayMovie(false);
-    getMovie();
+  function handleNextMovie() {
+    startCoundown();
   }
+
+  useEffect(() => {
+    if (count === 0) {
+      getMovie();
+      setIsDisplayMovie(false);
+    }
+  }, [count, getMovie]);
 
   return (
     <div className={classes.movieContainer}>
@@ -93,6 +103,8 @@ export default function MediaCard({ openDrawer }) {
       >
         <HistoryIcon style={{ fontSize: 40 }} />
       </Button>
+
+      {isRunning && <Countdown count={count} />}
 
       <Card className={classes.cardContainer}>
         {!state.movie ? (
@@ -122,7 +134,7 @@ export default function MediaCard({ openDrawer }) {
         variant='contained'
         color='primary'
         className={classes.sideButtons}
-        onClick={fetchNextMovie}
+        onClick={isDisplayMovie ? handleNextMovie : handleShowDetails}
       >
         <SkipNextIcon style={{ fontSize: 40 }} />
       </Button>
