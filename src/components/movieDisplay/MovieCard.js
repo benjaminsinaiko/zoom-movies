@@ -5,6 +5,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import HistoryIcon from '@material-ui/icons/History';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -136,7 +137,11 @@ export default function MediaCard({ openDrawer }) {
         className={classes.sideButtons}
         onClick={isDisplayMovie ? handleNextMovie : handleShowDetails}
       >
-        <SkipNextIcon style={{ fontSize: 40 }} />
+        {isDisplayMovie ? (
+          <SkipNextIcon style={{ fontSize: 40 }} />
+        ) : (
+          <VisibilityIcon style={{ fontSize: 40 }} />
+        )}
       </Button>
     </div>
   );
