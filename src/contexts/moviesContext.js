@@ -53,7 +53,7 @@ const initialState = {
   image: null,
   imdbURL: null,
   history: [],
-  decades: ['release80s', 'release90s', 'release00s'],
+  decades: ['release80s', 'release90s'],
 };
 
 function MoviesProvider(props) {
