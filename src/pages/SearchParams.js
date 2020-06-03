@@ -8,6 +8,7 @@ import FastRewindIcon from '@material-ui/icons/FastRewind';
 import Slide from '@material-ui/core/Slide';
 
 import { useMovies } from '../contexts/moviesContext';
+import ReleaseYears from '../components/searchSettings/ReleaseYears';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,14 +18,20 @@ const useStyles = makeStyles(theme => ({
     width: '100vw',
     height: '100vh',
   },
-  closeButton: {
+  backToHome: {
     position: 'absolute',
     top: 5,
     left: 20,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  closeButton: {
     color: theme.palette.error.main,
   },
   mainContainer: {
     maxWidth: 1200,
+    height: '90vh',
+    border: '1px solid red',
   },
   releaseHeader: {
     minHeight: 95,
@@ -57,109 +64,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function DecadeButton({ id, label, isSelected, toggle }) {
-  const classes = useStyles();
-  return (
-    <Button
-      color='primary'
-      variant={isSelected ? 'contained' : 'outlined'}
-      className={classes.decadeButton}
-      size='large'
-      onClick={() => toggle(id)}
-    >
-      <Typography variant='h4'>
-        {label}
-        <span>s</span>
-      </Typography>
-    </Button>
-  );
-}
-
-const allYears = ['release80s', 'release90s', 'release00s'];
-
 export default function SearchParams() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { state, updateWithYears } = useMovies();
+  const { state } = useMovies();
   const {
     queryParams: { withYears },
   } = state;
-  const isAllSelected = withYears.length === allYears.length;
   const noneSelected = withYears.length === 0;
-
-  function isSelected(id) {
-    return withYears.includes(id);
-  }
-
-  function toggleDecade(id) {
-    if (isSelected(id)) {
-      updateWithYears(withYears.filter(d => d !== id));
-    } else {
-      updateWithYears([...withYears, id]);
-    }
-  }
-
-  function selectAll() {
-    updateWithYears(allYears);
-  }
 
   return (
     <Slide direction='down' in mountOnEnter unmountOnExit>
       <Container className={classes.root}>
-        <Button
-          className={classes.closeButton}
-          startIcon={<FastRewindIcon />}
-          disabled={noneSelected}
-          onClick={() => navigate('/')}
-        >
-          Back
-        </Button>
+        <div className={classes.backToHome}>
+          <Button
+            className={classes.closeButton}
+            startIcon={<FastRewindIcon />}
+            disabled={noneSelected}
+            onClick={() => navigate('/')}
+          >
+            Back
+          </Button>
+          {noneSelected && (
+            <Typography
+              align='center'
+              variant='subtitle1'
+              className={classes.noneSelectedText}
+            >
+              No dates selected...
+            </Typography>
+          )}
+        </div>
 
         <div className={classes.mainContainer}>
-          <div className={classes.releaseHeader}>
-            <Typography align='center' variant='h3' gutterBottom>
-              Pick Release Dates
-            </Typography>
-            {noneSelected && (
-              <Typography
-                align='center'
-                variant='subtitle2'
-                className={classes.noneSelectedText}
-              >
-                No dates selected...
-              </Typography>
-            )}
-          </div>
-          <div className={classes.decadeContainer}>
-            <DecadeButton
-              id='release80s'
-              label='80'
-              isSelected={isSelected('release80s')}
-              toggle={toggleDecade}
-            />
-            <DecadeButton
-              id='release90s'
-              label='90'
-              isSelected={isSelected('release90s')}
-              toggle={toggleDecade}
-            />
-            <DecadeButton
-              id='release00s'
-              label='00'
-              isSelected={isSelected('release00s')}
-              toggle={toggleDecade}
-            />
-          </div>
-          <div className={classes.allDecadesContainer}>
-            <Button
-              color='secondary'
-              variant={isAllSelected ? 'outlined' : 'contained'}
-              className={classes.allDecadeButton}
-              onClick={selectAll}
-            >
-              {isAllSelected ? 'All Selected' : 'Select All'}
-            </Button>
-          </div>
+          <ReleaseYears />
         </div>
       </Container>
     </Slide>
