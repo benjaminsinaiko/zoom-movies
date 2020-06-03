@@ -14,6 +14,12 @@ function moviesReducer(state, action) {
         image: null,
         imdbURL: null,
       };
+    case 'movie_failure':
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
     case 'movie_success':
       const { id, movieTitle, imagePath, imdbID } = action.payload;
       const imdb = `https://www.imdb.com/title/${imdbID}`;
@@ -35,6 +41,7 @@ function moviesReducer(state, action) {
           ...state.history,
         ],
       };
+
     case 'update_with_years':
       return {
         ...state,
@@ -57,6 +64,7 @@ const initialState = {
     withYears: ['release80s', 'release90s'],
     withoutGenres: [16, 99, 36, 10402, 10770],
   },
+  error: null,
 };
 
 function MoviesProvider(props) {
@@ -75,10 +83,11 @@ function MoviesProvider(props) {
       });
     } catch (error) {
       console.log('error', error);
+      dispatch({ type: 'movie_failure', payload: error });
     }
   }
 
-  // Selected movie release years updater
+  // Update query params - Release Years
   async function updateWithYears(decadesArray) {
     dispatch({ type: 'update_with_years', payload: decadesArray });
   }
