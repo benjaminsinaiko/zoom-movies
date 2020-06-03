@@ -67,8 +67,8 @@ export const genres = [
   },
 ];
 
-// For reference (initial state)
-export const excludeGenres = [
+// Always exclude (initial state)
+export const excludedGenres = [
   {
     id: 16,
     name: 'Animation',

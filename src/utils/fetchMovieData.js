@@ -26,7 +26,7 @@ async function getRandomMovie(selectedReleaseYears, urlGenres) {
   const randomPage = getRandomItem(pages);
 
   const { data } = await movieDB.get(
-    `${baseURL}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${randomPage}&primary_release_year=${randomYear}&vote_count.gte=0.0&with_original_language=en&without_genres=${urlGenres}`
+    `${baseURL}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${randomPage}&primary_release_year=${randomYear}&vote_count.gte=0.0&with_original_language=en&without_genres=${urlGenres}&with_original_language=en`
   );
 
   const randomMovie = getRandomItem(data.results);

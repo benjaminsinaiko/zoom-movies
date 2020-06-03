@@ -9,14 +9,14 @@ import Slide from '@material-ui/core/Slide';
 
 import { useMovies } from '../contexts/moviesContext';
 import ReleaseYears from '../components/searchSettings/ReleaseYears';
+import Genres from '../components/searchSettings/Genres';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    width: '100vw',
-    height: '100vh',
+    width: '90vw',
   },
   backToHome: {
     position: 'absolute',
@@ -29,35 +29,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.error.main,
   },
   mainContainer: {
+    marginTop: 50,
     maxWidth: 1200,
-    height: '90vh',
-    border: '1px solid red',
-  },
-  releaseHeader: {
-    minHeight: 95,
-  },
-  decadeContainer: {
+    minHeight: '90vh',
     display: 'flex',
-    justifyContent: 'space-around',
-    marginTop: theme.spacing(6),
-  },
-  allDecadesContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: theme.spacing(4),
-  },
-  decadeButton: {
-    width: '20vw',
-    maxWidth: '30%',
-    height: '15vh',
-    '& span': {
-      fontSize: '.7em',
-    },
-  },
-  allDecadeButton: {
-    width: '35%',
-    height: 50,
-    marginTop: theme.spacing(4),
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   noneSelectedText: {
     color: theme.palette.error.main,
@@ -91,13 +68,14 @@ export default function SearchParams() {
               variant='subtitle1'
               className={classes.noneSelectedText}
             >
-              No dates selected...
+              No decade selected...
             </Typography>
           )}
         </div>
 
         <div className={classes.mainContainer}>
           <ReleaseYears />
+          <Genres />
         </div>
       </Container>
     </Slide>

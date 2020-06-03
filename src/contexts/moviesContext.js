@@ -41,11 +41,15 @@ function moviesReducer(state, action) {
           ...state.history,
         ],
       };
-
     case 'update_with_years':
       return {
         ...state,
         queryParams: { ...state.queryParams, withYears: action.payload },
+      };
+    case 'update_without_genres':
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, withoutGenres: action.payload },
       };
 
     default:
@@ -79,22 +83,46 @@ function MoviesProvider(props) {
       );
       dispatch({
         type: 'movie_success',
-        payload: { id, movieTitle, imagePath, imdbID },
+        payload: {
+          id,
+          movieTitle,
+          imagePath,
+          imdbID,
+        },
       });
     } catch (error) {
       console.log('error', error);
-      dispatch({ type: 'movie_failure', payload: error });
+      dispatch({
+        type: 'movie_failure',
+        payload: error,
+      });
     }
   }
 
   // Update query params - Release Years
-  async function updateWithYears(decadesArray) {
-    dispatch({ type: 'update_with_years', payload: decadesArray });
+  function updateWithYears(decadesArray) {
+    dispatch({
+      type: 'update_with_years',
+      payload: decadesArray,
+    });
+  }
+
+  // Update query params - Movie Genres
+  function updateWithoutGenres(genresArray) {
+    dispatch({
+      type: 'update_without_genres',
+      payload: genresArray,
+    });
   }
 
   return (
     <MoviesContext.Provider
-      value={{ state, getMovie, updateWithYears }}
+      value={{
+        state,
+        getMovie,
+        updateWithYears,
+        updateWithoutGenres,
+      }}
       {...props}
     />
   );

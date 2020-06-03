@@ -9,13 +9,21 @@ import { releaseYears } from '../../api/queryConstants';
 const useStyles = makeStyles(theme => ({
   yearsRoot: {
     width: '100%',
+    height: '40vh',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    border: '1px solid yellow',
   },
   yearsHeader: {
     minHeight: 95,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    border: '1px solid green',
+  },
+  selectAllButton: {
+    width: 170,
+    maxWidth: '30%',
+    height: 50,
   },
   decadeContainer: {
     display: 'flex',
@@ -29,10 +37,6 @@ const useStyles = makeStyles(theme => ({
     '& span': {
       fontSize: '.7em',
     },
-  },
-  allDecadeButton: {
-    width: 170,
-    height: 50,
   },
 }));
 
@@ -85,13 +89,15 @@ export default function ReleaseYears() {
         <Typography variant='h3'>Release Dates</Typography>
         <Button
           color='secondary'
-          variant={isAllSelected ? 'outlined' : 'contained'}
-          className={classes.allDecadeButton}
+          variant={isAllSelected ? null : 'outlined'}
+          className={classes.selectAllButton}
           onClick={selectAll}
+          disabled={isAllSelected}
         >
           {isAllSelected ? 'All Selected' : 'Select All'}
         </Button>
       </div>
+
       <div className={classes.decadeContainer}>
         <DecadeButton
           id='release80s'
