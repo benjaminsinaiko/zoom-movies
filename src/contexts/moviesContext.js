@@ -35,10 +35,10 @@ function moviesReducer(state, action) {
           ...state.history,
         ],
       };
-    case 'update_decades':
+    case 'update_with_years':
       return {
         ...state,
-        decades: action.payload,
+        queryParams: { ...state.queryParams, withYears: action.payload },
       };
 
     default:
@@ -53,7 +53,10 @@ const initialState = {
   image: null,
   imdbURL: null,
   history: [],
-  decades: ['release80s', 'release90s'],
+  queryParams: {
+    withYears: ['release80s', 'release90s'],
+    withoutGenres: [16, 99, 36, 10402, 10770],
+  },
 };
 
 function MoviesProvider(props) {
@@ -62,16 +65,30 @@ function MoviesProvider(props) {
   // Movie Search
   async function getMovie() {
     dispatch({ type: 'request_movie' });
-    const { id, movieTitle, imagePath, imdbID } = await fetchMovieData(state.decades);
-    dispatch({ type: 'movie_success', payload: { id, movieTitle, imagePath, imdbID } });
+    try {
+      const { id, movieTitle, imagePath, imdbID } = await fetchMovieData(
+        state.queryParams
+      );
+      dispatch({
+        type: 'movie_success',
+        payload: { id, movieTitle, imagePath, imdbID },
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
-  // Decades updater
-  async function updateDecades(decadesArray) {
-    dispatch({ type: 'update_decades', payload: decadesArray });
+  // Selected movie release years updater
+  async function updateWithYears(decadesArray) {
+    dispatch({ type: 'update_with_years', payload: decadesArray });
   }
 
-  return <MoviesContext.Provider value={{ state, getMovie, updateDecades }} {...props} />;
+  return (
+    <MoviesContext.Provider
+      value={{ state, getMovie, updateWithYears }}
+      {...props}
+    />
+  );
 }
 
 function useMovies() {

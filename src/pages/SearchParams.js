@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 
 import { useMovies } from '../contexts/moviesContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -75,30 +75,32 @@ function DecadeButton({ id, label, isSelected, toggle }) {
   );
 }
 
-const initialState = ['release80s', 'release90s', 'release00s'];
+const allYears = ['release80s', 'release90s', 'release00s'];
 
 export default function SearchParams() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { state, updateDecades } = useMovies();
-  const { decades } = state;
-  const isAllSelected = decades.length === initialState.length;
-  const noneSelected = decades.length === 0;
+  const { state, updateWithYears } = useMovies();
+  const {
+    queryParams: { withYears },
+  } = state;
+  const isAllSelected = withYears.length === allYears.length;
+  const noneSelected = withYears.length === 0;
 
   function isSelected(id) {
-    return decades.includes(id);
+    return withYears.includes(id);
   }
 
   function toggleDecade(id) {
     if (isSelected(id)) {
-      updateDecades(decades.filter((d) => d !== id));
+      updateWithYears(withYears.filter(d => d !== id));
     } else {
-      updateDecades([...decades, id]);
+      updateWithYears([...withYears, id]);
     }
   }
 
   function selectAll() {
-    updateDecades(initialState);
+    updateWithYears(allYears);
   }
 
   return (
@@ -119,7 +121,11 @@ export default function SearchParams() {
               Pick Release Dates
             </Typography>
             {noneSelected && (
-              <Typography align='center' variant='subtitle2' className={classes.noneSelectedText}>
+              <Typography
+                align='center'
+                variant='subtitle2'
+                className={classes.noneSelectedText}
+              >
                 No dates selected...
               </Typography>
             )}
