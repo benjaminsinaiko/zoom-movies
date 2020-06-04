@@ -17,11 +17,24 @@ const useStyles = makeStyles(theme => ({
   movieContainer: {
     display: 'flex',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: '95%',
+      flexDirection: 'column',
+      justifyContent: 'space-evenly',
+    },
   },
   sideButtons: {
     height: '95vh',
     minWidth: '5vw',
     padding: 0,
+    [theme.breakpoints.down('sm')]: {
+      height: '10vh',
+    },
+  },
+  displayNextButton: {
+    [theme.breakpoints.down('sm')]: {
+      height: '15vh',
+    },
   },
   cardContainer: {
     position: 'relative',
@@ -29,9 +42,17 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 1900,
     height: '95vh',
     background: theme.palette.warning.light,
+    [theme.breakpoints.down('sm')]: {
+      height: '50vh',
+      width: '100vw',
+    },
   },
   media: {
     height: '80%',
+    [theme.breakpoints.down('sm')]: {
+      height: '60%',
+      backgroundSize: 'contain',
+    },
   },
   movieInfo: {
     height: '20%',
@@ -39,6 +60,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: '40%',
+    },
   },
   movieTitle: {
     padding: theme.spacing(2),
@@ -156,7 +180,7 @@ export default function MediaCard({ openDrawer }) {
       <Button
         variant='contained'
         color='primary'
-        className={classes.sideButtons}
+        className={`${classes.sideButtons} ${classes.displayNextButton}`}
         onClick={isDisplayMovie ? handleNextMovie : handleShowDetails}
       >
         {isDisplayMovie ? (

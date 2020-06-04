@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
   countdownRoot: {
     width: '100%',
-    height: '80%',
+    height: '90%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      width: '45vw',
+      height: '45vw',
+    },
   },
 }));
 
