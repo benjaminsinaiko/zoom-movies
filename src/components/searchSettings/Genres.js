@@ -19,11 +19,19 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      '& h3': {
+        fontSize: '1.75rem',
+      },
+    },
   },
   selectAllButton: {
     width: 170,
     maxWidth: '30%',
     height: 50,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '.75rem',
+    },
   },
   genreContainer: {
     display: 'flex',
@@ -32,6 +40,11 @@ const useStyles = makeStyles(theme => ({
   },
   genreButton: {
     margin: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '.65rem',
+      minWidth: 105,
+      margin: theme.spacing(1.5),
+    },
   },
 }));
 

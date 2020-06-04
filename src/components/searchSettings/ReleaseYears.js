@@ -13,17 +13,28 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '5%',
     paddingRight: '5%',
     border: '1px solid yellow',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(2),
+    },
   },
   yearsHeader: {
     minHeight: 95,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      '& h3': {
+        fontSize: '1.75rem',
+      },
+    },
   },
   selectAllButton: {
     width: 170,
     maxWidth: '30%',
     height: 50,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '.75rem',
+    },
   },
   decadeContainer: {
     display: 'flex',
