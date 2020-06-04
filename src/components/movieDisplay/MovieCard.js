@@ -13,7 +13,7 @@ import { useMovies } from '../../contexts/moviesContext';
 import useCountdown from '../../hooks/useCountdown';
 import Countdown from './Countdown';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   movieContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -105,24 +105,46 @@ export default function MediaCard({ openDrawer }) {
         <HistoryIcon style={{ fontSize: 40 }} />
       </Button>
 
-      {isRunning && <Countdown count={count} />}
+      {isRunning && count > 0 && <Countdown count={count} />}
 
       <Card className={classes.cardContainer}>
         {!state.movie ? (
           <div className={classes.loadingSkeleton}>
-            <Skeleton variant='rect' width='90%' height='80%' className={classes.skeleton} />
-            <Skeleton variant='text' width='90%' height='20%' className={classes.skeleton} />
+            <Skeleton
+              variant='rect'
+              width='90%'
+              height='80%'
+              className={classes.skeleton}
+            />
+            <Skeleton
+              variant='text'
+              width='90%'
+              height='20%'
+              className={classes.skeleton}
+            />
           </div>
         ) : (
           <>
-            <CardMedia className={classes.media} image={state.image} title='Movie Image' />
+            <CardMedia
+              className={classes.media}
+              image={state.image}
+              title='Movie Image'
+            />
             <div className={classes.movieInfo}>
               {isDisplayMovie ? (
-                <Typography variant='h4' align='center' className={classes.movieTitle}>
+                <Typography
+                  variant='h4'
+                  align='center'
+                  className={classes.movieTitle}
+                >
                   {state.movie}
                 </Typography>
               ) : (
-                <Typography variant='h3' className={classes.blurryText} onClick={handleShowDetails}>
+                <Typography
+                  variant='h3'
+                  className={classes.blurryText}
+                  onClick={handleShowDetails}
+                >
                   ? ? ? ? ? ? ? ? ? ?
                 </Typography>
               )}

@@ -36,7 +36,7 @@ export default function useCountdown() {
     () => {
       setCount(count - 1);
     },
-    isRunning ? 1000 : null
+    isRunning ? 750 : null
   );
 
   function startCountdown() {
