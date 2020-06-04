@@ -1,5 +1,6 @@
 import React, { useReducer, createContext, useContext } from 'react';
 
+import { excludedGenres } from '../api/queryConstants';
 import fetchMovieData from '../utils/fetchMovieData';
 
 const MoviesContext = createContext();
@@ -57,6 +58,10 @@ function moviesReducer(state, action) {
   }
 }
 
+function getExcluded() {
+  return excludedGenres.map(genre => genre.id);
+}
+
 const initialState = {
   isLoading: false,
   id: null,
@@ -66,7 +71,7 @@ const initialState = {
   history: [],
   queryParams: {
     withYears: ['release80s', 'release90s'],
-    withoutGenres: [16, 99, 36, 10402, 10770],
+    withoutGenres: getExcluded(),
   },
   error: null,
 };

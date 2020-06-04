@@ -4,12 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import HistoryIcon from '@material-ui/icons/History';
+import MovieFilterIcon from '@material-ui/icons/MovieFilter';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 
 import { useMovies } from '../contexts/moviesContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -75,17 +76,21 @@ export default function Home({ openDrawer }) {
   return (
     <Container className={classes.root}>
       {hasHistory && (
-        <Button className={classes.historyButton} onClick={openDrawer}>
+        <Button
+          className={classes.historyButton}
+          onClick={openDrawer}
+          startIcon={<HistoryIcon />}
+        >
           Movie History
         </Button>
       )}
 
       <Button
         className={classes.settingsButton}
-        startIcon={<EventAvailableIcon />}
+        startIcon={<MovieFilterIcon />}
         onClick={() => navigate('/settings')}
       >
-        Release Dates
+        Movie Filter
       </Button>
 
       <div>

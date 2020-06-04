@@ -61,10 +61,6 @@ export const genres = [
     id: 10752,
     name: 'War',
   },
-  {
-    id: 37,
-    name: 'Western',
-  },
 ];
 
 // Always exclude (initial state)
@@ -88,5 +84,9 @@ export const excludedGenres = [
   {
     id: 10770,
     name: 'TV Movie',
+  },
+  {
+    id: 37,
+    name: 'Western',
   },
 ];
