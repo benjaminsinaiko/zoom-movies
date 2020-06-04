@@ -21,18 +21,29 @@ const useStyles = makeStyles(theme => ({
     '& h1': {
       fontSize: '8rem',
     },
+    [theme.breakpoints.down('sm')]: {
+      '& h1': {
+        fontSize: '5rem',
+      },
+    },
   },
   historyButton: {
     position: 'absolute',
     top: 3,
     left: 20,
     color: theme.palette.error.main,
+    [theme.breakpoints.down('sm')]: {
+      left: 5,
+    },
   },
   settingsButton: {
     position: 'absolute',
     top: 3,
     right: 20,
     color: theme.palette.error.main,
+    [theme.breakpoints.down('sm')]: {
+      right: 5,
+    },
   },
   one: {
     color: theme.palette.primary.main,
@@ -58,6 +69,13 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(4),
       transform: 'scale(1.8)',
       color: theme.palette.warning.light,
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2rem',
+      '&  svg': {
+        marginLeft: theme.spacing(0),
+        transform: 'scale(1)',
+      },
     },
   },
 }));
