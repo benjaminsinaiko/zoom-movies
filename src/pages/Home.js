@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: 'center',
     width: '100vw',
     height: '100vh',
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: '8rem',
     },
     [theme.breakpoints.down('sm')]: {
+      height: 600,
       '& h1': {
         fontSize: '5rem',
       },
@@ -59,6 +60,10 @@ const useStyles = makeStyles(theme => ({
   },
   goContainer: {
     height: 125,
+    textAlign: 'right',
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+    },
   },
   goButton: {
     alignSelf: 'flex-end',
