@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'absolute',
     width: '100%',
-    height: '100%',
+    height: '95%',
     display: 'flex',
     justifyContent: 'center',
     zIndex: 10,
