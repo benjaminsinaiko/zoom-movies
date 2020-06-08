@@ -9,6 +9,7 @@ import Slide from '@material-ui/core/Slide';
 
 import { useMovies } from '../contexts/moviesContext';
 import ReleaseYears from '../components/searchSettings/ReleaseYears';
+import RandomLevel from '../components/searchSettings/RandomLevel';
 import Genres from '../components/searchSettings/Genres';
 
 const useStyles = makeStyles(theme => ({
@@ -29,19 +30,19 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.error.main,
   },
   mainContainer: {
-    marginTop: 50,
     maxWidth: 1200,
-    minHeight: '90vh',
+    minHeight: '99vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   noneSelectedText: {
     color: theme.palette.error.main,
   },
 }));
 
-export default function SearchParams() {
+export default function SearchSettings() {
   const classes = useStyles();
   const navigate = useNavigate();
   const { state } = useMovies();
@@ -74,6 +75,7 @@ export default function SearchParams() {
         </div>
 
         <div className={classes.mainContainer}>
+          <RandomLevel />
           <ReleaseYears />
           <Genres />
         </div>

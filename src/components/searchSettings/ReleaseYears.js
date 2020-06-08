@@ -9,7 +9,7 @@ import { releaseYears } from '../../api/queryConstants';
 const useStyles = makeStyles(theme => ({
   yearsRoot: {
     width: '100%',
-    height: '40vh',
+    height: '38vh',
     paddingLeft: '5%',
     paddingRight: '5%',
     border: '1px solid yellow',

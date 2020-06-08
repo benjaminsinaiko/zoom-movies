@@ -9,7 +9,7 @@ import { genres, excludedGenres } from '../../api/queryConstants';
 const useStyles = makeStyles(theme => ({
   yearsRoot: {
     width: '100%',
-    minHeight: '45vh',
+    minHeight: '38vh',
     paddingLeft: '5%',
     paddingRight: '5%',
     border: '1px solid yellow',
