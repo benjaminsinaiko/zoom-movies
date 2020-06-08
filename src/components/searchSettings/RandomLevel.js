@@ -39,11 +39,11 @@ const marks = [
     label: 'Only Popular',
   },
   {
-    value: 3,
+    value: 4,
     label: 'Mostly Popular',
   },
   {
-    value: 6,
+    value: 7,
     label: 'Some Random',
   },
   {
@@ -65,6 +65,14 @@ const mobileMarks = [
 export default function RandomLevel() {
   const classes = useStyles();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const { state, updateRandomnessPages } = useMovies();
+  const pages = state.queryParams.pages;
+
+  const handleChange = (event, newValue) => {
+    if (newValue !== pages) {
+      updateRandomnessPages(newValue);
+    }
+  };
 
   return (
     <div className={classes.randomRoot}>
@@ -80,7 +88,8 @@ export default function RandomLevel() {
       <Slider
         color='secondary'
         className={classes.slider}
-        defaultValue={3}
+        onChange={handleChange}
+        value={pages}
         aria-labelledby='movie-randomness-slider'
         step={1}
         marks={isMobile ? mobileMarks : marks}

@@ -52,6 +52,11 @@ function moviesReducer(state, action) {
         ...state,
         queryParams: { ...state.queryParams, withoutGenres: action.payload },
       };
+    case 'update_randomness_pages':
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, pages: action.payload },
+      };
 
     default:
       return state;
@@ -72,6 +77,7 @@ const initialState = {
   queryParams: {
     withYears: ['release80s', 'release90s'],
     withoutGenres: getExcluded(),
+    pages: 4,
   },
   error: null,
 };
@@ -120,6 +126,14 @@ function MoviesProvider(props) {
     });
   }
 
+  // Update query params - Randomness Pages
+  function updateRandomnessPages(pageNumber) {
+    dispatch({
+      type: 'update_randomness_pages',
+      payload: pageNumber,
+    });
+  }
+
   return (
     <MoviesContext.Provider
       value={{
@@ -127,6 +141,7 @@ function MoviesProvider(props) {
         getMovie,
         updateWithYears,
         updateWithoutGenres,
+        updateRandomnessPages,
       }}
       {...props}
     />
