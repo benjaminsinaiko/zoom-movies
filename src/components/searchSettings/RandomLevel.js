@@ -4,7 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
-import { useMovies } from '../../contexts/moviesContext';
+import { useQuery } from '../../contexts/queryContext';
 
 const useStyles = makeStyles(theme => ({
   randomRoot: {
@@ -65,8 +65,8 @@ const mobileMarks = [
 export default function RandomLevel() {
   const classes = useStyles();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const { state, updateRandomnessPages } = useMovies();
-  const pages = state.queryParams.pages;
+  const { queryState, updateRandomnessPages } = useQuery();
+  const pages = queryState.pages;
 
   const handleChange = (event, newValue) => {
     if (newValue !== pages) {

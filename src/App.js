@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 
 import darkTheme from '../src/utils/theme';
+import { QueryProvider } from '../src/contexts/queryContext';
 import { MoviesProvider } from '../src/contexts/moviesContext';
 import HistoryDrawer from '../src/pages/HistoryDrawer';
 import SearchSettings from './pages/SearchSettings';
@@ -46,11 +47,13 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <MoviesProvider>
-        <Router>
-          <AppRouter />
-        </Router>
-      </MoviesProvider>
+      <QueryProvider>
+        <MoviesProvider>
+          <Router>
+            <AppRouter />
+          </Router>
+        </MoviesProvider>
+      </QueryProvider>
     </ThemeProvider>
   );
 }

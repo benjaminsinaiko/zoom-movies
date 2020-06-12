@@ -1,10 +1,14 @@
 import movieDB from '../api/tmdb';
 import getRandomItem from '../utils/getRandomItem';
-import { releaseYears } from '../api/queryConstants';
 
-// Make movie results pages array
+// Create movie results pages array
 function getPagesArray(pageNumber) {
   return [...Array(pageNumber).keys()].map(x => x + 1);
+}
+
+// Create movie release years array
+function getYearsArray([startYear, numberOfYears]) {
+  return [...Array(numberOfYears).keys()].map(x => x + startYear);
 }
 
 // Movie backdrop image and IMDb ID
@@ -34,6 +38,7 @@ async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
     `${baseURL}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${randomPage}&primary_release_year=${randomYear}&vote_count.gte=0.0&with_original_language=en&without_genres=${urlGenres}&with_original_language=en`
   );
 
+  // Pick random movie from results
   const randomMovie = getRandomItem(data.results);
   // Fetch movie image and imdb id
   const movieData = await getData(randomMovie.id);
@@ -47,15 +52,12 @@ async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
 }
 
 // Fetch and format movie data
-export default async function fetchMovieData({
-  withYears,
-  withoutGenres,
-  pages,
-}) {
+export default async function fetchMovieData(queryState) {
+  // console.log('from fetch movie', queryState);
+  const { withYears, withoutGenres, pages } = queryState;
+
   // Create selected release years array
-  const selectedReleaseYears = withYears.reduce((array, decade) => {
-    return [...array, ...releaseYears[decade]];
-  }, []);
+  const selectedReleaseYears = getYearsArray(withYears);
 
   // Format url params for genre
   const urlGenres = withoutGenres.join('%2C');

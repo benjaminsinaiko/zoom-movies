@@ -1,5 +1,6 @@
 import React, { useReducer, createContext, useContext } from 'react';
 
+import { useQuery } from './queryContext';
 import { excludedGenres } from '../api/queryConstants';
 import fetchMovieData from '../utils/fetchMovieData';
 
@@ -19,7 +20,7 @@ function moviesReducer(state, action) {
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        movieError: action.payload,
       };
     case 'movie_success':
       const { id, movieTitle, imagePath, imdbID } = action.payload;
@@ -42,29 +43,10 @@ function moviesReducer(state, action) {
           ...state.history,
         ],
       };
-    case 'update_with_years':
-      return {
-        ...state,
-        queryParams: { ...state.queryParams, withYears: action.payload },
-      };
-    case 'update_without_genres':
-      return {
-        ...state,
-        queryParams: { ...state.queryParams, withoutGenres: action.payload },
-      };
-    case 'update_randomness_pages':
-      return {
-        ...state,
-        queryParams: { ...state.queryParams, pages: action.payload },
-      };
 
     default:
       return state;
   }
-}
-
-function getExcluded() {
-  return excludedGenres.map(genre => genre.id);
 }
 
 const initialState = {
@@ -74,15 +56,11 @@ const initialState = {
   image: null,
   imdbURL: null,
   history: [],
-  queryParams: {
-    withYears: ['release80s', 'release90s'],
-    withoutGenres: getExcluded(),
-    pages: 4,
-  },
-  error: null,
+  movieError: null,
 };
 
 function MoviesProvider(props) {
+  const { queryState } = useQuery();
   const [state, dispatch] = useReducer(moviesReducer, initialState);
 
   // Movie Search
@@ -90,7 +68,7 @@ function MoviesProvider(props) {
     dispatch({ type: 'request_movie' });
     try {
       const { id, movieTitle, imagePath, imdbID } = await fetchMovieData(
-        state.queryParams
+        queryState
       );
       dispatch({
         type: 'movie_success',
@@ -110,38 +88,11 @@ function MoviesProvider(props) {
     }
   }
 
-  // Update query params - Release Years
-  function updateWithYears(decadesArray) {
-    dispatch({
-      type: 'update_with_years',
-      payload: decadesArray,
-    });
-  }
-
-  // Update query params - Movie Genres
-  function updateWithoutGenres(genresArray) {
-    dispatch({
-      type: 'update_without_genres',
-      payload: genresArray,
-    });
-  }
-
-  // Update query params - Randomness Pages
-  function updateRandomnessPages(pageNumber) {
-    dispatch({
-      type: 'update_randomness_pages',
-      payload: pageNumber,
-    });
-  }
-
   return (
     <MoviesContext.Provider
       value={{
         state,
         getMovie,
-        updateWithYears,
-        updateWithoutGenres,
-        updateRandomnessPages,
       }}
       {...props}
     />

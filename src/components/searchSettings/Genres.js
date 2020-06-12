@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import { useMovies } from '../../contexts/moviesContext';
+import { useQuery } from '../../contexts/queryContext';
 import { genres, excludedGenres } from '../../api/queryConstants';
 
 const useStyles = makeStyles(theme => ({
@@ -65,10 +65,8 @@ function GenreButton({ genre, isExcluded, toggle }) {
 
 export default function Genres() {
   const classes = useStyles();
-  const { state, updateWithoutGenres } = useMovies();
-  const {
-    queryParams: { withoutGenres },
-  } = state;
+  const { queryState, updateWithoutGenres } = useQuery();
+  const { withoutGenres } = queryState;
   const isAllIncluded = withoutGenres.length === excludedGenres.length;
 
   function isExcluded(id) {
