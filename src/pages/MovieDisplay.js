@@ -10,13 +10,16 @@ import { useMovies } from '../contexts/moviesContext';
 import goToIMDb from '../utils/goToIMDb';
 import MovieCard from '../components/movieDisplay/MovieCard';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: '85vh',
+    },
   },
   backButton: {
     position: 'absolute',
