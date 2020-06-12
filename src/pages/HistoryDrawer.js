@@ -8,7 +8,7 @@ import goToIMDb from '../utils/goToIMDb';
 import HistoryCard from '../components/history/HistoryCard';
 import HistoryNoImageCard from '../components/history/HistoryNoImageCard';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
     width: 400,
@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: 10,
+    [theme.breakpoints.down('sm')]: {
+      width: '80vw',
+    },
   },
   homeButton: {
     position: 'absolute',
