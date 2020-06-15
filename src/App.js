@@ -8,7 +8,7 @@ import darkTheme from '../src/utils/theme';
 import { QueryProvider } from '../src/contexts/queryContext';
 import { MoviesProvider } from '../src/contexts/moviesContext';
 import HistoryDrawer from '../src/pages/HistoryDrawer';
-import SearchSettings from './pages/SearchSettings';
+import QuerySettings from './pages/QuerySettings';
 import MovieDisplay from './pages/MovieDisplay';
 import Home from './pages/Home';
 
@@ -33,7 +33,7 @@ function AppRouter() {
         />
         <Route
           path='/settings'
-          element={<SearchSettings openDrawer={openDrawer} />}
+          element={<QuerySettings openDrawer={openDrawer} />}
         />
       </Routes>
       <Drawer anchor='left' open={drawerOpen} onClose={closeDrawer}>

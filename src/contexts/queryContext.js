@@ -38,7 +38,7 @@ function getExcluded() {
 }
 
 const initialState = {
-  withYears: [1985, 21],
+  withYears: [1985, 1999],
   withoutGenres: getExcluded(),
   pages: 4,
   queryError: null,

@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
 import Slide from '@material-ui/core/Slide';
 
-import { useMovies } from '../contexts/moviesContext';
 import ReleaseYears from '../components/searchSettings/ReleaseYears';
 import RandomLevel from '../components/searchSettings/RandomLevel';
 import Genres from '../components/searchSettings/Genres';
@@ -42,14 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchSettings() {
+export default function QuerySettings() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { state } = useMovies();
-  const {
-    queryParams: { withYears },
-  } = state;
-  const noneSelected = withYears.length === 0;
 
   return (
     <Slide direction='down' in mountOnEnter unmountOnExit>
@@ -58,20 +51,10 @@ export default function SearchSettings() {
           <Button
             className={classes.closeButton}
             startIcon={<FastRewindIcon />}
-            disabled={noneSelected}
             onClick={() => navigate('/')}
           >
             Back
           </Button>
-          {noneSelected && (
-            <Typography
-              align='center'
-              variant='subtitle1'
-              className={classes.noneSelectedText}
-            >
-              No decade selected...
-            </Typography>
-          )}
         </div>
 
         <div className={classes.mainContainer}>

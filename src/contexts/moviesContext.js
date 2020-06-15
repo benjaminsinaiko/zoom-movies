@@ -1,7 +1,6 @@
 import React, { useReducer, createContext, useContext } from 'react';
 
 import { useQuery } from './queryContext';
-import { excludedGenres } from '../api/queryConstants';
 import fetchMovieData from '../utils/fetchMovieData';
 
 const MoviesContext = createContext();

@@ -7,8 +7,9 @@ function getPagesArray(pageNumber) {
 }
 
 // Create movie release years array
-function getYearsArray([startYear, numberOfYears]) {
-  return [...Array(numberOfYears).keys()].map(x => x + startYear);
+function getYearsArray([startYear, endYear]) {
+  const yearsRange = endYear - startYear + 1;
+  return [...Array(yearsRange).keys()].map(x => x + startYear);
 }
 
 // Movie backdrop image and IMDb ID
@@ -30,6 +31,7 @@ async function getData(movieId) {
 // Fetch movie with data from TMDb
 async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
   const baseURL = `https://api.themoviedb.org/3/discover/movie?`;
+  console.log(selectedReleaseYears);
 
   const randomYear = getRandomItem(selectedReleaseYears);
   const randomPage = getRandomItem(getPagesArray(pages));
@@ -53,7 +55,7 @@ async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
 
 // Fetch and format movie data
 export default async function fetchMovieData(queryState) {
-  // console.log('from fetch movie', queryState);
+  console.log('from fetch movie', queryState);
   const { withYears, withoutGenres, pages } = queryState;
 
   // Create selected release years array
