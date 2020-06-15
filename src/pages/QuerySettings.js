@@ -45,13 +45,13 @@ export default function QuerySettings() {
   const navigate = useNavigate();
 
   return (
-    <Slide direction='down' in mountOnEnter unmountOnExit>
+    <Slide direction='right' in mountOnEnter unmountOnExit>
       <Container className={classes.root}>
         <div className={classes.backToHome}>
           <Button
             className={classes.closeButton}
             startIcon={<FastRewindIcon />}
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1)}
           >
             Back
           </Button>

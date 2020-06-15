@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import FastRewindIcon from '@material-ui/icons/FastRewind';
+import MovieFilterIcon from '@material-ui/icons/MovieFilter';
 import TheatersIcon from '@material-ui/icons/Theaters';
 import Slide from '@material-ui/core/Slide';
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       height: '85vh',
     },
   },
-  backButton: {
+  settingsButton: {
     position: 'absolute',
     top: 3,
     left: 20,
@@ -46,11 +46,11 @@ export default function MovieDisplay({ openDrawer }) {
     <Slide direction='left' in mountOnEnter unmountOnExit>
       <div className={classes.root}>
         <Button
-          className={classes.backButton}
-          startIcon={<FastRewindIcon />}
-          onClick={() => navigate('/')}
+          className={classes.settingsButton}
+          startIcon={<MovieFilterIcon />}
+          onClick={() => navigate('/settings')}
         >
-          Home
+          Movie Filter
         </Button>
 
         {imdbURL && (

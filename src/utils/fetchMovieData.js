@@ -31,7 +31,6 @@ async function getData(movieId) {
 // Fetch movie with data from TMDb
 async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
   const baseURL = `https://api.themoviedb.org/3/discover/movie?`;
-  console.log(selectedReleaseYears);
 
   const randomYear = getRandomItem(selectedReleaseYears);
   const randomPage = getRandomItem(getPagesArray(pages));
@@ -55,7 +54,6 @@ async function getRandomMovie(selectedReleaseYears, urlGenres, pages) {
 
 // Fetch and format movie data
 export default async function fetchMovieData(queryState) {
-  console.log('from fetch movie', queryState);
   const { withYears, withoutGenres, pages } = queryState;
 
   // Create selected release years array

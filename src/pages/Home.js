@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  historyButton: {
+  settingsButton: {
     position: 'absolute',
     top: 3,
     left: 20,
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
       left: 5,
     },
   },
-  settingsButton: {
+  historyButton: {
     position: 'absolute',
     top: 3,
     right: 20,
@@ -98,6 +98,14 @@ export default function Home({ openDrawer }) {
 
   return (
     <Container className={classes.root}>
+      <Button
+        className={classes.settingsButton}
+        startIcon={<MovieFilterIcon />}
+        onClick={() => navigate('/settings')}
+      >
+        Movie Filter
+      </Button>
+
       {hasHistory && (
         <Button
           className={classes.historyButton}
@@ -107,14 +115,6 @@ export default function Home({ openDrawer }) {
           Movie History
         </Button>
       )}
-
-      <Button
-        className={classes.settingsButton}
-        startIcon={<MovieFilterIcon />}
-        onClick={() => navigate('/settings')}
-      >
-        Movie Filter
-      </Button>
 
       <div>
         <Typography align='center' variant='h1'>
